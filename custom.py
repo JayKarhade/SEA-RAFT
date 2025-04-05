@@ -1,5 +1,5 @@
-import sys
-sys.path.append('core')
+# import sys
+# sys.path.append('sea_raft')
 import argparse
 import os
 import cv2
@@ -13,10 +13,15 @@ import torch.utils.data as data
 
 from config.parser import parse_args
 
-import datasets
-from raft import RAFT
-from utils.flow_viz import flow_to_image
-from utils.utils import load_ckpt
+import sea_raft.datasets
+from sea_raft.raft import RAFT
+from sea_raft.utils.flow_viz import flow_to_image
+from sea_raft.utils.utils import load_ckpt
+
+# import datasets
+# from raft import RAFT
+# from utils.flow_viz import flow_to_image
+# from utils.utils import load_ckpt
 
 def create_color_bar(height, width, color_map):
     """
@@ -103,9 +108,9 @@ def demo_data(path, args, model, image1, image2):
 
 @torch.no_grad()
 def demo_custom(model, args, device=torch.device('cuda')):
-    image1 = cv2.imread("./custom/image1.jpg")
+    image1 = cv2.imread("/home/jaykarhade/research/Any4D/benchmarking/SEA-RAFT/custom/image1.jpg")
     image1 = cv2.cvtColor(image1, cv2.COLOR_BGR2RGB)
-    image2 = cv2.imread("./custom/image2.jpg")
+    image2 = cv2.imread("/home/jaykarhade/research/Any4D/benchmarking/SEA-RAFT/custom/image1.jpg")
     image2 = cv2.cvtColor(image2, cv2.COLOR_BGR2RGB)
     image1 = torch.tensor(image1, dtype=torch.float32).permute(2, 0, 1)
     image2 = torch.tensor(image2, dtype=torch.float32).permute(2, 0, 1)
